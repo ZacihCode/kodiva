@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kodiva - Digitalisasi UMKM & Edukasi Teknologi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#3b82f6',
+                        accent: '#8b5cf6',
+                        dark: '#0f172a',
+                        'cyber-blue': '#00d4ff',
+                        'neon-green': '#00ff88',
+                        'electric-purple': '#7c3aed'
+                    },
+                    fontFamily: {
+                        'tech': ['Monaco', 'Menlo', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Cyber Grid Background */
+        .cyber-grid {
+            background-image:
+                linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #00d4ff, #6366f1);
+            border-radius: 50%;
+            animation: float-down 6s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float-down {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                /* jatuh ke bawah sejauh 100% tinggi layar */
+                opacity: 0;
+            }
+        }
+
+        /* Glowing effects */
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Holographic text effect */
+        .holographic {
+            background: linear-gradient(45deg, #00d4ff, #6366f1, #8b5cf6, #00ff88);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: hologram 3s ease-in-out infinite;
+        }
+
+        @keyframes hologram {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Neon border effect */
+        .neon-border {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #00d4ff, #6366f1) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: exclude;
+            mask-composite: exclude;
+        }
+
+        /* 3D Transform effects */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        .card-3d:hover {
+            transform: rotateY(5deg) rotateX(5deg) translateZ(10px);
+        }
+
+        /* Typing animation */
+        .typing-animation {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #00d4ff
+            }
+        }
+
+        /* Pulse animation */
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from {
+                box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+            }
+
+            to {
+                box-shadow: 0 0 40px rgba(99, 102, 241, 0.8);
+            }
+        }
+
+        /* Technology Matrix Rain Effect */
+        .tech-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: transparent;
+        }
+
+        /* Parallax scrolling */
+        .parallax {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00d4ff, #6366f1);
+            border-radius: 4px;
+        }
+
+        /* Code block styling */
+        .code-block {
+            background: #1e293b;
+            border: 1px solid #334155;
+            font-family: 'Monaco', 'Menlo', monospace;
+            color: #00d4ff;
+        }
+
+        /* Hexagon shapes */
+        .hexagon {
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+
+        /* Glitch effect */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: #00d4ff;
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: #ff0040;
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+
+            0%,
+            100% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(-2px, -2px);
+            }
+
+            60% {
+                transform: translate(2px, 2px);
+            }
+
+            80% {
+                transform: translate(2px, -2px);
+            }
+        }
+
+        @keyframes glitch-2 {
+
+            0%,
+            100% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(2px, 0);
+            }
+
+            40% {
+                transform: translate(-2px, 0);
+            }
+
+            60% {
+                transform: translate(0, 2px);
+            }
+
+            80% {
+                transform: translate(0, -2px);
+            }
+        }
+
+        /* Loading animation */
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+
+            0%,
+            20% {
+                content: '';
+            }
+
+            40% {
+                content: '.';
+            }
+
+            60% {
+                content: '..';
+            }
+
+            80%,
+            100% {
+                content: '...';
+            }
+        }
+
+        /* Responsive design enhancements */
+        @media (max-width: 768px) {
+            .cyber-grid {
+                background-size: 30px 30px;
+            }
+
+            .card-3d:hover {
+                transform: none;
+            }
+        }
+
+        /* Tailwind custom scrollbar */
+        .scrollbar-thin::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 212, 255, 0.4);
+            border-radius: 4px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background-color: rgba(15, 23, 42, 0.6);
+        }
+
+        .nav-link {
+            @apply text-gray-300 hover:text-cyber-blue transition-all duration-300 relative group;
+        }
+
+        .nav-link span,
+        .mobile-nav-link {
+            @apply block relative;
+        }
+
+        .nav-link::after {
+            content: "";
+            @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-cyber-blue transition-all duration-300 group-hover:w-full;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-white overflow-x-hidden">
+    <!-- Technology Matrix Rain Effect -->
+    <canvas id="tech-canvas" class="tech-particles"></canvas>
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-lg bg-dark/80 border-b border-primary/20">
+        <nav class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#beranda" class="flex items-center">
+                    <img src="./Kodiva_1.png" class="h-12 w-auto max-w-[150px] object-contain mr-2">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#beranda" class="nav-link">Beranda</a>
+                    <a href="#layanan" class="nav-link">Layanan</a>
+                    <a href="#portofolio" class="nav-link">Portofolio</a>
+                    <a href="#tentang" class="nav-link">Tentang</a>
+                    <a href="#review" class="nav-link">Review</a>
+                    <a href="#kontak" class="nav-link">Kontak</a>
+                </div>
+
+                <!-- Desktop Login Button -->
+                <div class="hidden md:block">
+                    <a href="#login"
+                        class="relative bg-gradient-to-r from-primary to-cyber-blue text-white px-6 py-3 rounded-lg font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/50 group">
+                        <span class="relative z-10">Login / Daftar</span>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-cyber-blue to-primary rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="mobile-menu-btn"
+                    class="md:hidden text-gray-300 hover:text-cyber-blue transition-colors duration-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu"
+                class="hidden md:hidden mt-4 pb-4 backdrop-blur-lg bg-dark/90 rounded-lg border border-primary/20">
+                <div class="flex flex-col space-y-4 p-4">
+                    <a href="#beranda"
+                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Beranda</a>
+                    <a href="#layanan"
+                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Layanan</a>
+                    <a href="#portofolio"
+                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Portofolio</a>
+                    <a href="#tentang"
+                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Tentang</a>
+                    <a href="#review"
+                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Review</a>
+                    <a href="#kontak"
+                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Kontak</a>
+                    <button
+                        class="bg-gradient-to-r from-primary to-cyber-blue text-white px-6 py-3 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-primary/50">
+                        Login / Daftar
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative min-h-screen flex items-center justify-center cyber-grid">
+        <!-- Floating Particles -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
+            <div class="particle" style="top: 30%; left: 60%; animation-delay: 2s;"></div>
+            <div class="particle" style="top: 80%; left: 30%; animation-delay: 3s;"></div>
+            <div class="particle" style="top: 15%; left: 90%; animation-delay: 4s;"></div>
+        </div>
+
+        <div class="container mx-auto px-4 py-32 relative z-10">
+            <div class="max-w-6xl mx-auto text-center">
+                <!-- Main Heading -->
+                <div class="mb-8 text-center">
+                    <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+                        <span class="holographic glitch" data-text="Kodiva">
+                            <img src="./Kodiva_2.png" alt="Kodiva"
+                                class="mx-auto h-12 w-auto max-w-[200px] object-contain">
+                        </span>
+                    </h1>
+                    <div class="text-2xl md:text-4xl font-light mb-4">
+                        <span class="typing-animation border-r-2 border-cyber-blue">
+                            Digitalisasi Masa Depan
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Subtitle -->
+                <p class="text-xl md:text-2xl mb-8 text-gray-300 max-w-4xl mx-auto">
+                    Revolusi teknologi untuk <span class="text-cyber-blue font-semibold">UMKM</span> dan
+                    <span class="text-neon-green font-semibold">edukasi digital</span> yang mengubah cara Anda berbisnis
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col md:flex-row gap-6 justify-center mb-5">
+                    <button
+                        class="group relative bg-gradient-to-r from-primary to-cyber-blue text-white px-8 py-4 rounded-lg font-semibold text-lg transform transition-all duration-300 hover:scale-105 glow-blue">
+                        <span class="relative z-10 flex items-center justify-center">
+                            <i class="fas fa-rocket mr-2"></i>
+                            Mulai Transformasi
+                        </span>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-cyber-blue to-primary rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </button>
+                    <button
+                        class="group relative border-2 border-cyber-blue text-cyber-blue px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-cyber-blue hover:text-dark">
+                        <span class="flex items-center justify-center">
+                            <i class="fas fa-play mr-2"></i>
+                            Lihat Demo
+                        </span>
+                    </button>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center mb-5">
+                    <div class="animate-bounce" style="opacity: 1;">
+                        <p class="text-sm text-gray-400 flex items-center">
+                            <i class="fas fa-arrow-down mr-2"></i>
+                            Scroll ke bawah
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tech Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20 card-3d">
+                        <div class="text-4xl font-bold text-electric-purple mb-2">
+                            <span class="">10</span>+
+                        </div>
+                        <div class="text-gray-300">Klien Aktif</div>
+                        <div class="mt-2 text-electric-purple text-sm">
+                            <i class="fas fa-chart-line mr-1"></i>
+                            Growing
+                        </div>
+                    </div>
+                    <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20 card-3d">
+                        <div class="flex flex-col items-center">
+                            <div class="text-5xl font-extrabold text-cyber-blue mb-1 tracking-tight">
+                                2<span class="text-2xl align-top">+</span>
+                            </div>
+                            <div class="text-gray-300 text-sm uppercase tracking-wide mb-3">
+                                Tahun Pengalaman
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+                                <div class="bg-gradient-to-r from-cyber-blue to-primary h-2 rounded-full animate-pulse"
+                                    style="width: 5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20 card-3d">
+                        <div class="text-4xl font-bold text-neon-green mb-2">
+                            <span class="">24</span>/7
+                        </div>
+                        <div class="text-gray-300">AI Support</div>
+                        <div class="mt-4 flex justify-center items-center text-neon-green">
+                            <div class="w-2 h-2 bg-neon-green rounded-full mr-2 animate-pulse"></div>
+                            <span class="text-sm">Online</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Layanan Section -->
+    <section id="layanan" class="py-20 bg-gradient-to-br from-dark to-gray-900 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6">
+                    <span class="holographic">Layanan Premium</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Solusi teknologi terdepan dengan AI dan automation untuk mengoptimalkan bisnis Anda
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- AI-Powered Kasir -->
+                <div
+                    class="group relative bg-dark/50 backdrop-blur-lg rounded-xl p-8 border border-primary/20 card-3d hover:border-cyber-blue/50 transition-all duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-primary/10 to-cyber-blue/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div
+                            class="bg-gradient-to-r from-primary to-cyber-blue text-white rounded-lg w-16 h-16 flex items-center justify-center mb-6 glow-blue">
+                            <i class="fas fa-robot text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">AI-Powered Kasir</h3>
+                        <p class="text-gray-300 mb-6">
+                            Sistem kasir cerdas dengan machine learning untuk prediksi stok, analisis penjualan, dan
+                            otomasi inventory
+                        </p>
+                        <div class="code-block rounded-lg p-4 mb-6 text-sm">
+                            <div class="text-neon-green">// AI Features</div>
+                            <div class="text-cyber-blue">predictStock()</div>
+                            <div class="text-white">analyzeCustomerBehavior()</div>
+                            <div class="text-electric-purple">autoReorder()</div>
+                        </div>
+                        <ul class="text-gray-300 space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>AI Prediksi Stok</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>Voice Commands</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>Real-time Analytics</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>Blockchain Security</span>
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full bg-gradient-to-r from-primary to-cyber-blue text-white py-3 rounded-lg font-semibold transform transition-all duration-300 hover:scale-105 glow-blue">
+                            Upgrade Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Smart Booking System -->
+                <div
+                    class="group relative bg-dark/50 backdrop-blur-lg rounded-xl p-8 border border-primary/20 card-3d hover:border-neon-green/50 transition-all duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-neon-green/10 to-primary/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div
+                            class="bg-gradient-to-r from-neon-green to-primary text-white rounded-lg w-16 h-16 flex items-center justify-center mb-6 glow-purple">
+                            <i class="fas fa-calendar-alt text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">Smart Booking System</h3>
+                        <p class="text-gray-300 mb-6">
+                            Platform booking otomatis dengan AI-Powered scheduling, chatbot integration, dan real-time
+                            notifications
+                        </p>
+                        <div class="code-block rounded-lg p-4 mb-6 text-sm">
+                            <div class="text-neon-green">// Smart Features</div>
+                            <div class="text-cyber-blue">autoSchedule()</div>
+                            <div class="text-white">chatbotSupport()</div>
+                            <div class="text-electric-purple">pushNotification()</div>
+                        </div>
+                        <ul class="text-gray-300 space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>AI Auto-Scheduling</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>Chatbot Integration</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>Mobile App</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>IoT Sensors</span>
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full bg-gradient-to-r from-neon-green to-primary text-white py-3 rounded-lg font-semibold transform transition-all duration-300 hover:scale-105 glow-purple">
+                            Deploy Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- VR/AR Training -->
+                <div
+                    class="group relative bg-dark/50 backdrop-blur-lg rounded-xl p-8 border border-primary/20 card-3d hover:border-electric-purple/50 transition-all duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-electric-purple/10 to-cyber-blue/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div
+                            class="bg-gradient-to-r from-electric-purple to-cyber-blue text-white rounded-lg w-16 h-16 flex items-center justify-center mb-6 glow-blue">
+                            <i class="fas fa-vr-cardboard text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">VR/AR Training</h3>
+                        <p class="text-gray-300 mb-6">
+                            Pelatihan immersive dengan Virtual Reality dan Augmented Reality untuk pengalaman belajar
+                            yang revolusioner
+                        </p>
+                        <div class="code-block rounded-lg p-4 mb-6 text-sm">
+                            <div class="text-neon-green">// Immersive Tech</div>
+                            <div class="text-cyber-blue">initVR()</div>
+                            <div class="text-white">renderAR()</div>
+                            <div class="text-electric-purple">trackProgress()</div>
+                        </div>
+                        <ul class="text-gray-300 space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>VR Simulations</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>AR Overlays</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>Motion Tracking</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-neon-green mr-2"></i>
+                                <span>3D Analytics</span>
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full bg-gradient-to-r from-electric-purple to-cyber-blue text-white py-3 rounded-lg font-semibold transform transition-all duration-300 hover:scale-105 glow-blue">
+                            Experience Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portofolio Section -->
+    <section id="portofolio" class="py-20 bg-gradient-to-br from-gray-900 to-dark relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6">
+                    <span class="holographic">Innovation Showcase</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Jelajahi proyek-proyek revolusioner yang telah mengubah landscape bisnis digital
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div
+                    class="group relative h-[420px] bg-dark/50 backdrop-blur-lg rounded-xl overflow-hidden border border-primary/20 card-3d hover:border-electric-green/50 transition-all duration-500">
+                    <!-- Hover background -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-electric-purple/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="relative">
+                            <img src="./project1.png" alt="Kuis Pintar Dengan AI"
+                                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 relative z-0" />
+
+                            <div
+                                class="absolute bottom-4 left-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
+
+                                <a href="https://edu-flows-ai.vercel.app/" target="_blank" title="Lihat Demo"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-dark hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fas fa-external-link-alt text-sm"></i>
+                                </a>
+
+                                <a href="https://github.com/username/repo" target="_blank" title="Lihat Kode"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-dark border border-primary/30 text-white hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2 text-white">Kuis Pintar Dengan AI</h3>
+                            <p class="text-gray-300 mb-4 text-sm">
+                                Kuis Pintar Dengan AI, mengenerate ribuan soal kuis tergantung kesulitan yang dipilih.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-2">
+                                <span class="bg-neon-green/20 text-neon-green px-2 py-1 rounded text-xs">Python
+                                    Flask</span>
+                                <span
+                                    class="bg-electric-purple/20 text-electric-purple px-2 py-1 rounded text-xs">Tailwindcss</span>
+                                <span class="bg-cyber-blue/20 text-cyber-blue px-2 py-1 rounded text-xs">Gemini</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div
+                    class="group relative h-[420px] bg-dark/50 backdrop-blur-lg rounded-xl overflow-hidden border border-primary/20 card-3d hover:border-electric-green/50 transition-all duration-500">
+                    <!-- Hover background -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-electric-purple/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="relative">
+                            <img src="./project2.png" alt="Kuis Pintar Dengan AI"
+                                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 relative z-0" />
+                            <div
+                                class="absolute bottom-4 left-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
+
+                                <a href="https://demo-link.com" target="_blank" title="Lihat Demo"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-dark hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fas fa-external-link-alt text-sm"></i>
+                                </a>
+
+                                <a href="https://github.com/username/repo" target="_blank" title="Lihat Kode"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-dark border border-primary/30 text-white hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2 text-white">Smart Laboratorium</h3>
+                            <p class="text-gray-300 mb-4 text-sm">
+                                Platform Laboratorium Universitas Islam Negeri Raden Fatah Palembang
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-neon-green/20 text-neon-green px-2 py-1 rounded text-xs">Laravel</span>
+                                <span
+                                    class="bg-cyber-blue/20 text-cyber-blue px-2 py-1 rounded text-xs">Tailwindcss</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div
+                    class="group relative h-[420px] bg-dark/50 backdrop-blur-lg rounded-xl overflow-hidden border border-primary/20 card-3d hover:border-electric-green/50 transition-all duration-500">
+                    <!-- Hover background -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-electric-purple/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="relative">
+                            <img src="./project3.png" alt="Kuis Pintar Dengan AI"
+                                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 relative z-0" />
+                            <div
+                                class="absolute bottom-4 left-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
+
+                                <a href="https://demo-link.com" target="_blank" title="Lihat Demo"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-dark hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fas fa-external-link-alt text-sm"></i>
+                                </a>
+
+                                <a href="https://github.com/username/repo" target="_blank" title="Lihat Kode"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-dark border border-primary/30 text-white hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2 text-white">Klasifikasi Jenis Sampah</h3>
+                            <p class="text-gray-300 mb-4 text-sm">
+                                Klasifikasi Jenis Sampah Menggunakan Model CNN
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span
+                                    class="bg-electric-purple/20 text-electric-purple px-2 py-1 rounded text-xs">Python
+                                    Flask</span>
+                                <span
+                                    class="bg-cyber-blue/20 text-cyber-blue px-2 py-1 rounded text-xs">Tailwindcss</span>
+                                <span class="bg-neon-green/20 text-neon-green px-2 py-1 rounded text-xs">Gemini</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div
+                    class="group relative h-[420px] bg-dark/50 backdrop-blur-lg rounded-xl overflow-hidden border border-primary/20 card-3d hover:border-electric-green/50 transition-all duration-500">
+                    <!-- Hover background -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-electric-purple/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="relative">
+                            <img src="./project4.png" alt="Kuis Pintar Dengan AI"
+                                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 relative z-0" />
+                            <div
+                                class="absolute bottom-4 left-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
+
+                                <a href="https://demo-link.com" target="_blank" title="Lihat Demo"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-dark hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fas fa-external-link-alt text-sm"></i>
+                                </a>
+
+                                <a href="https://github.com/username/repo" target="_blank" title="Lihat Kode"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-dark border border-primary/30 text-white hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2 text-white">Layanan Hosting</h3>
+                            <p class="text-gray-300 mb-4 text-sm">
+                                Website Penyedia Layanan Hosting
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-cyber-blue/20 text-cyber-blue px-2 py-1 rounded text-xs">Laravel</span>
+                                <span
+                                    class="bg-neon-green/20 text-neon-green px-2 py-1 rounded text-xs">Tailwindcss</span>
+                                <span
+                                    class="bg-electric-purple/20 text-electric-purple px-2 py-1 rounded text-xs">Aws</span>
+                                <span
+                                    class="bg-electric-purple/20 text-electric-purple px-2 py-1 rounded text-xs">Pterodactly</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div
+                    class="group relative h-[420px] bg-dark/50 backdrop-blur-lg rounded-xl overflow-hidden border border-primary/20 card-3d hover:border-electric-green/50 transition-all duration-500">
+                    <!-- Hover background -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-electric-purple/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+
+                    <div class="relative z-10">
+                        <div class="relative">
+                            <img src="./project5.png" alt="Kuis Pintar Dengan AI"
+                                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 relative z-0" />
+                            <div
+                                class="absolute bottom-4 left-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
+
+                                <a href="https://demo-link.com" target="_blank" title="Lihat Demo"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-dark hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fas fa-external-link-alt text-sm"></i>
+                                </a>
+
+                                <a href="https://github.com/username/repo" target="_blank" title="Lihat Kode"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-dark border border-primary/30 text-white hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2 text-white">Layanan Smart Laundry</h3>
+                            <p class="text-gray-300 mb-4 text-sm">
+                                Sistem laundry pintar dengan AI computer vision untuk tracking inventory real-time
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-cyber-blue/20 text-cyber-blue px-2 py-1 rounded text-xs">Laravel</span>
+                                <span
+                                    class="bg-neon-green/20 text-neon-green px-2 py-1 rounded text-xs">Tailwindcss</span>
+                                <span
+                                    class="bg-electric-purple/20 text-electric-purple px-2 py-1 rounded text-xs">Gemini</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div
+                    class="group relative h-[420px] bg-dark/50 backdrop-blur-lg rounded-xl overflow-hidden border border-primary/20 card-3d hover:border-electric-green/50 transition-all duration-500">
+                    <!-- Hover background -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-neon-green/20 to-electric-purple/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <img src="./project6.png" alt="Kuis Pintar Dengan AI"
+                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 relative z-0" />
+                        <div
+                            class="absolute bottom-4 left-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
+
+                            <a href="https://demo-link.com" target="_blank" title="Lihat Demo"
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-dark hover:scale-110 transition-transform duration-300 shadow-md">
+                                <i class="fas fa-external-link-alt text-sm"></i>
+                            </a>
+
+                            <a href="https://github.com/username/repo" target="_blank" title="Lihat Kode"
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-dark border border-primary/30 text-white hover:scale-110 transition-transform duration-300 shadow-md">
+                                <i class="fab fa-github text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-white">Blockchain Security</h3>
+                        <p class="text-gray-300 mb-4 text-sm">
+                            Sistem Kasir pintar dengan AI computer vision untuk tracking inventory real-time
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-electric-purple/20 text-electric-purple px-2 py-1 rounded text-xs">Laravel</span>
+                            <span class="bg-cyber-blue/20 text-cyber-blue px-2 py-1 rounded text-xs">Tailwindcss</span>
+                            <span class="bg-neon-green/20 text-neon-green px-2 py-1 rounded text-xs">Gemini</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Tentang Section -->
+    <section id="tentang" class="py-20 bg-gradient-to-br from-dark to-gray-900 relative">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Left Content -->
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-5xl font-bold mb-6">
+                            <span class="holographic">Tentang Kodiva</span>
+                        </h2>
+                        <p class="text-xl text-gray-300 leading-relaxed">
+                            PT Kode Inovasi (Kodiva) adalah pioneer dalam transformasi digital yang mengkhususkan diri
+                            dalam
+                            <span class="text-cyber-blue font-semibold">AI-powered solutions</span> untuk UMKM.
+                            Kami menggabungkan teknologi terdepan dengan pemahaman mendalam tentang kebutuhan bisnis
+                            lokal.
+                        </p>
+                    </div>
+
+                    <!-- Mission -->
+                    <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20">
+                        <h3 class="text-2xl font-semibold mb-4 text-cyber-blue">
+                            <i class="fas fa-target mr-2"></i>
+                            Misi Kami
+                        </h3>
+                        <p class="text-gray-300">
+                            Memberdayakan UMKM Indonesia dengan teknologi AI, blockchain, dan IoT untuk menciptakan
+                            ekosistem bisnis yang sustainable dan competitive di era digital.
+                        </p>
+                    </div>
+
+                    <!-- Vision -->
+                    <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20">
+                        <h3 class="text-2xl font-semibold mb-4 text-neon-green">
+                            <i class="fas fa-eye mr-2"></i>
+                            Visi Kami
+                        </h3>
+                        <p class="text-gray-300">
+                            Menjadi platform teknologi terdepan di Indonesia yang tidak hanya mempercepat transformasi
+                            digital UMKM, tetapi juga memberdayakan ekosistem bisnis lokal melalui integrasi solusi
+                            berbasis AI, IoT, blockchain, dan cloud computing. Kami berkomitmen untuk menciptakan
+                            inovasi berkelanjutan, meningkatkan literasi teknologi di seluruh lapisan masyarakat, dan
+                            menjadikan Indonesia sebagai pusat digital ekonomi kreatif yang kompetitif di kancah global.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Content - Stats & Features -->
+                <div class="space-y-8">
+                    <!-- Tim Kami -->
+                    <div class="mt-2">
+                        <h2 class="text-4xl font-bold mb-6 holographic text-center">Tim Kami</h2>
+
+                        <div
+                            class="bg-dark/40 border border-primary/20 rounded-xl p-6 backdrop-blur-lg overflow-x-auto scrollbar-thin scrollbar-thumb-cyber-blue/60 scrollbar-track-dark/40">
+                            <div class="flex space-x-6 min-w-[768px]">
+
+                                <!-- Tim 1 -->
+                                <div
+                                    class="min-w-[220px] bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20 card-3d text-center">
+                                    <div class="relative w-fit mx-auto mb-4">
+                                        <img src="https://cdn.discordapp.com/attachments/945456645255880754/1402563446985457784/Abi.png?ex=68945e80&is=68930d00&hm=e2410f6b4719f0501eb46ea75f156f870be8313252763860b3a6640f189b4063&"
+                                            alt="Muhammad Dhias Habibi"
+                                            class="w-24 h-24 rounded-full border-4 border-cyber-blue shadow-lg">
+                                        <a href="https://www.linkedin.com/in/muhammad-dhias-habibi-%E2%80%8E-04b62a343/"
+                                            target="_blank" title="LinkedIn"
+                                            class="absolute -top-1.5 -right-12 bg-cyber-blue text-white w-6 h-6 flex items-center justify-center rounded-full shadow-md hover:bg-white hover:text-cyber-blue transition duration-300">
+                                            <i class="fab fa-linkedin-in text-xs"></i>
+                                        </a>
+                                    </div>
+                                    <h4 class="text-xl font-semibold text-white mb-1">Muhammad Dhias Habibi</h4>
+                                    <p class="text-cyber-blue text-sm mb-2">CEO & Tech Consultant</p>
+                                    <p class="text-gray-400 text-sm">Ahli strategi digital, machine learning, dan
+                                        transformasi teknologi UMKM</p>
+                                </div>
+
+                                <!-- Tim 2 -->
+                                <div
+                                    class="min-w-[220px] bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20 card-3d text-center">
+                                    <div class="relative w-fit mx-auto mb-4">
+                                        <img src="https://via.placeholder.com/150" alt="Coming Soon"
+                                            class="w-24 h-24 rounded-full border-4 border-neon-green shadow-lg">
+                                        <a href="#" target="_blank" title="LinkedIn"
+                                            class="absolute -top-1.5 -right-12 bg-neon-green text-white w-6 h-6 flex items-center justify-center rounded-full shadow-md hover:bg-white hover:text-neon-green transition duration-300">
+                                            <i class="fab fa-linkedin-in text-xs"></i>
+                                        </a>
+                                    </div>
+                                    <h4 class="text-xl font-semibold text-white mb-1">Coming Soon</h4>
+                                    <p class="text-neon-green text-sm mb-2">UI/UX Designer</p>
+                                    <p class="text-gray-400 text-sm">Mendesain pengalaman pengguna modern dan intuitif
+                                        untuk aplikasi Kodiva</p>
+                                </div>
+
+                                <!-- Tim 3 -->
+                                <div
+                                    class="min-w-[220px] bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20 card-3d text-center">
+                                    <div class="relative w-fit mx-auto mb-4">
+                                        <img src="https://via.placeholder.com/150" alt="Coming Soon"
+                                            class="w-24 h-24 rounded-full border-4 border-electric-purple shadow-lg">
+                                        <a href="#" target="_blank" title="LinkedIn"
+                                            class="absolute -top-1.5 -right-12 bg-electric-purple text-white w-6 h-6 flex items-center justify-center rounded-full shadow-md hover:bg-white hover:text-electric-purple transition duration-300">
+                                            <i class="fab fa-linkedin-in text-xs"></i>
+                                        </a>
+                                    </div>
+                                    <h4 class="text-xl font-semibold text-white mb-1">Coming Soon</h4>
+                                    <p class="text-electric-purple text-sm mb-2">Lead Developer</p>
+                                    <p class="text-gray-400 text-sm">Mengembangkan solusi backend dan integrasi sistem
+                                        berbasis AI & IoT</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technology Stack -->
+                    <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20">
+                        <h3 class="text-2xl font-semibold mb-4 text-electric-purple">
+                            <i class="fas fa-cogs mr-2"></i>
+                            Tech Stack
+                        </h3>
+                        <div class="flex space-x-4 overflow-x-auto scrollbar-thin scrollbar-thumb-cyber-blue/60
+                        scrollbar-track-dark/40 py-2 px-1">
+                            <div class="flex-shrink-0 text-center p-3 bg-cyber-blue/10 rounded-lg min-w-[100px]">
+                                <i class="fab fa-python text-2xl text-cyber-blue mb-2"></i>
+                                <div class="text-xs text-gray-300">Python AI</div>
+                            </div>
+
+                            <div class="flex-shrink-0 text-center p-3 bg-cyber-blue/10 rounded-lg min-w-[100px]">
+                                <i class="fa-brands fa-laravel text-2xl text-cyber-blue mb-2"></i>
+                                <div class="text-xs text-gray-300">Laravel</div>
+                            </div>
+
+                            <div class="flex-shrink-0 text-center p-3 bg-neon-green/10 rounded-lg min-w-[100px]">
+                                <i class="fa-brands fa-flutter text-2xl text-neon-green mb-2"></i>
+                                <div class="text-xs text-gray-300">Flutter</div>
+                            </div>
+                            <div class="flex-shrink-0 text-center p-3 bg-electric-purple/10 rounded-lg min-w-[100px]">
+                                <i class="fas fa-database text-2xl text-electric-purple mb-2"></i>
+                                <div class="text-xs text-gray-300">MongoDB</div>
+                            </div>
+                            <div class="flex-shrink-0 text-center p-3 bg-electric-purple/10 rounded-lg min-w-[100px]">
+                                <i class="fab fa-aws text-2xl text-electric-purple mb-2"></i>
+                                <div class="text-xs text-gray-300">Aws Cloud</div>
+                            </div>
+                            <div class="flex-shrink-0 text-center p-3 bg-electric-purple/10 rounded-lg min-w-[100px]">
+                                <i class="fab fa-docker text-2xl text-electric-purple mb-2"></i>
+                                <div class="text-xs text-gray-300">Docker</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section id="review" class="py-20 bg-gradient-to-br from-gray-900 to-dark relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6">
+                    <span class="holographic">Client Success Stories</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Dengarkan pengalaman klien yang telah merasakan transformasi digital bersama Kodiva
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-8 border border-primary/20 card-3d">
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-r from-cyber-blue to-primary rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Sarah Wijaya</h4>
+                            <p class="text-gray-400 text-sm">CEO, Bakery Modern</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "Kodiva mengubah cara kami mengelola bisnis. Sistem AI mereka meningkatkan efisiensi toko kami
+                        hingga 300%. Incredible!"
+                    </p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-8 border border-primary/20 card-3d">
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-r from-neon-green to-primary rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Ahmad Rizki</h4>
+                            <p class="text-gray-400 text-sm">Founder, TechStart</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "Platform VR training dari Kodiva membantu tim kami menguasai teknologi baru dengan cepat. ROI
+                        yang luar biasa!"
+                    </p>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-8 border border-primary/20 card-3d">
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-r from-electric-purple to-primary rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Linda Kartika</h4>
+                            <p class="text-gray-400 text-sm">Owner, Fashion Boutique</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "Smart booking system mereka mengotomatisasi seluruh proses reservasi. Customer satisfaction
+                        naik 95%!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontak" class="py-20 bg-gradient-to-br from-dark to-gray-900 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6">
+                    <span class="holographic">Hubungi Kami</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Siap memulai transformasi digital? Tim expert kami siap membantu 24/7
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Contact Form -->
+                <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-8 border border-primary/20">
+                    <h3 class="text-2xl font-semibold mb-6 text-cyber-blue">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        Kirim Pesan
+                    </h3>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-gray-300 mb-2">Nama Lengkap</label>
+                            <input type="text"
+                                class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-cyber-blue focus:outline-none transition-colors duration-300"
+                                placeholder="Masukkan nama lengkap">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">Email</label>
+                            <input type="email"
+                                class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-cyber-blue focus:outline-none transition-colors duration-300"
+                                placeholder="nama@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">Perusahaan</label>
+                            <input type="text"
+                                class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-cyber-blue focus:outline-none transition-colors duration-300"
+                                placeholder="Nama perusahaan">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">Layanan yang Dibutuhkan</label>
+                            <select
+                                class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-cyber-blue focus:outline-none transition-colors duration-300">
+                                <option>Pilih layanan</option>
+                                <option>AI-Powered Kasir</option>
+                                <option>Smart Booking System</option>
+                                <option>VR/AR Training</option>
+                                <option>Custom Development</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">Pesan</label>
+                            <textarea rows="4"
+                                class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-cyber-blue focus:outline-none transition-colors duration-300"
+                                placeholder="Ceritakan kebutuhan Anda..."></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-primary to-cyber-blue text-white py-4 rounded-lg font-semibold transform transition-all duration-300 hover:scale-105 glow-blue">
+                            <i class="fas fa-rocket mr-2"></i>
+                            Kirim Pesan Sekarang
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <!-- Office -->
+                    <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20">
+                        <h3 class="text-xl font-semibold mb-4 text-neon-green">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Kantor Pusat
+                        </h3>
+                        <p class="text-gray-300">
+                            Jl. Teknologi Digital No. 123<br>
+                            Palembang, Sumatera Selatan, 12345<br>
+                            Indonesia
+                        </p>
+                    </div>
+
+                    <!-- Contact Details -->
+                    <div class="bg-dark/50 backdrop-blur-lg rounded-xl p-6 border border-primary/20">
+                        <h3 class="text-xl font-semibold mb-4 text-electric-purple">
+                            <i class="fas fa-phone mr-2"></i>
+                            Kontak Langsung
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-cyber-blue mr-3"></i>
+                                <span class="text-gray-300">+62 21 1234 5678</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-neon-green mr-3"></i>
+                                <span class="text-gray-300">hello@kodiva.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-globe text-electric-purple mr-3"></i>
+                                <span class="text-gray-300">www.kodiva.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31843.95237725488!2d104.7280463870031!3d-2.9909346247769884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b75bbf5f7b70f%3A0x94b104f79c10cb7c!2sPalembang%2C%20Sumatera%20Selatan!5e0!3m2!1sen!2sid!4v1720593337372!5m2!1sen!2sid"
+                            width="100%" height="350" style="border:0; border-radius: 1rem;" allowfullscreen=""
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                            class="w-full rounded-xl shadow-lg border border-primary/20">
+                        </iframe>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-dark to-gray-900 text-white py-12 border-t border-primary/20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <!-- Logo & Tagline -->
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <div class="flex items-center justify-center shadow-lg overflow-hidden">
+                        <img src="./Kodiva_1.png" alt="Kodiva Logo" class="w-8 h-8  object-contain">
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg text-cyber-blue"><img src="./Kodiva_2.png" alt="Kodvia"
+                                class="h-12 w-auto max-w-[120px] object-contain"></span>
+                        <span class="block text-xs text-gray-400">Digitalisasi Masa Depan</span>
+                    </div>
+                </div>
+
+                <!-- Footer Links -->
+                <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                    <a href="#"
+                        class="flex items-center text-gray-300 hover:text-cyber-blue text-sm transition duration-300 group">
+                        <i class="fas fa-user-secret mr-2 text-cyber-blue group-hover:animate-bounce"></i> Privacy
+                        Policy
+                    </a>
+                    <a href="#"
+                        class="flex items-center text-gray-300 hover:text-neon-green text-sm transition duration-300 group">
+                        <i class="fas fa-file-contract mr-2 text-neon-green group-hover:animate-bounce"></i> Terms
+                        of Service
+                    </a>
+                    <a href="#"
+                        class="flex items-center text-gray-300 hover:text-electric-purple text-sm transition duration-300 group">
+                        <i class="fas fa-cookie-bite mr-2 text-electric-purple group-hover:animate-bounce"></i>
+                        Cookie Policy
+                    </a>
+                </div>
+                <!-- Social Media -->
+                <div class="mt-4 md:mt-0">
+                    <h3 class="text-xl font-semibold mb-4 text-cyber-blue flex items-center">
+                        <i class="fas fa-share-alt mr-2"></i>
+                        Follow Us
+                    </h3>
+                    <div class="flex space-x-3">
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-gradient-to-r from-cyber-blue to-primary flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg"
+                            title="LinkedIn">
+                            <i class="fab fa-linkedin-in text-white"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-gradient-to-r from-neon-green to-primary flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg"
+                            title="Instagram">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-gradient-to-r from-electric-purple to-primary flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg"
+                            title="Facebook">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-gradient-to-r from-primary to-cyber-blue flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg"
+                            title="Twitter">
+                            <i class="fab fa-twitter text-white"></i>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-gradient-to-r from-neon-green to-electric-purple flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg"
+                            title="TikTok">
+                            <i class="fab fa-tiktok text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-xs text-gray-400 flex items-center justify-center gap-2">
+                <i class="far fa-copyright"></i>
+                <span>2024 Kodiva. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript untuk interaksi -->
+    <script>
+        const canvas = document.getElementById("tech-canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particleCount = 80;
+        const particles = [];
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 150
+        };
+
+        window.addEventListener("mousemove", (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        window.addEventListener("mouseout", () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = 1.5 + Math.random() * 1.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = "#00d4ff";
+                ctx.fill();
+            }
+        }
+
+        function connectLines() {
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a + 1; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const distance = dx * dx + dy * dy;
+
+                    if (distance < 10000) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = "rgba(0, 212, 255, 0.1)";
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Garis ke mouse
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = particles[a].x - mouse.x;
+                    const dy = particles[a].y - mouse.y;
+                    const distanceToMouse = dx * dx + dy * dy;
+
+                    if (distanceToMouse < mouse.radius * mouse.radius) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = "rgba(0, 212, 255, 0.3)";
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            connectLines();
+            requestAnimationFrame(animate);
+        }
+
+        function init() {
+            particles.length = 0;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            const nama = formData.get('nama');
+            const email = formData.get('email');
+            const telepon = formData.get('telepon');
+            const layanan = formData.get('layanan');
+            const pesan = formData.get('pesan');
+
+            // Basic validation
+            if (!nama || !email || !telepon || !pesan) {
+                alert('Mohon lengkapi semua field yang wajib diisi');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Format email tidak valid');
+                return;
+            }
+
+            // Show success message
+            alert('Terima kasih! Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda.');
+
+            // Reset form
+            this.reset();
+        });
+
+        // Pricing package selection
+        document.querySelectorAll('button:contains("Pilih Paket")').forEach(button => {
+            button.addEventListener('click', function () {
+                const packageName = this.closest('.bg-white').querySelector('h3').textContent;
+                const packagePrice = this.closest('.bg-white').querySelector('.text-4xl').textContent;
+
+                alert(`Anda memilih paket ${packageName} dengan harga ${packagePrice}. Silakan hubungi tim kami untuk melanjutkan proses pemesanan.`);
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('bg-white', 'shadow-lg');
+            } else {
+                header.classList.remove('bg-white', 'shadow-lg');
+            }
+        });
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>
