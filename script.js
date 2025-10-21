@@ -37,6 +37,7 @@ menuBtn.addEventListener("click", () => {
     ? '<i class="fas fa-times text-2xl"></i>'
     : '<i class="fas fa-bars text-2xl"></i>';
 });
+
 document.querySelectorAll("#mobile-menu a").forEach((link) => {
   link.addEventListener("click", () => {
     mobileMenu.classList.add("hidden");
