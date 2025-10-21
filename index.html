@@ -347,7 +347,9 @@
         }
 
         .nav-link {
-            @apply text-gray-300 hover:text-cyber-blue transition-all duration-300 relative group;
+            position: relative;
+            color: #d1d5db;
+            transition: all 0.3s ease;
         }
 
         .nav-link span,
@@ -357,7 +359,21 @@
 
         .nav-link::after {
             content: "";
-            @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-cyber-blue transition-all duration-300 group-hover:w-full;
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #00d4ff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #00d4ff;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
 
         @keyframes fadeInUp {
@@ -454,65 +470,59 @@
     <canvas id="tech-canvas" class="tech-particles"></canvas>
 
     <!-- Header -->
-    <header class="fixed w-full top-0 z-50 backdrop-blur-lg bg-dark/80 border-b border-primary/20 invisible-before">
-        <nav class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <a href="#beranda" class="flex items-center">
-                    <img src="./Kodiva_1.png" class="h-12 w-auto max-w-[150px] object-contain mr-2">
+    <header
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-500 backdrop-blur-lg bg-dark/80 border-b border-primary/20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#beranda" class="flex items-center">
+                <img src="./Kodiva_1.png" alt="Kodiva Logo"
+                    class="h-10 sm:h-12 w-auto max-w-[140px] sm:max-w-[150px] object-contain mr-2">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#beranda" class="nav-link">Beranda</a>
+                <a href="#layanan" class="nav-link">Layanan</a>
+                <a href="#portofolio" class="nav-link">Portofolio</a>
+                <a href="#tentang" class="nav-link">Tentang</a>
+                <a href="#review" class="nav-link">Review</a>
+                <a href="#kontak" class="nav-link">Kontak</a>
+            </div>
+
+            <!-- Desktop Login Button -->
+            <div class="hidden md:block">
+                <a href="#login"
+                    class="relative bg-gradient-to-r from-primary to-cyber-blue text-white px-5 py-2.5 rounded-lg font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/50 group">
+                    <span class="relative z-10">Login / Daftar</span>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-cyber-blue to-primary rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
                 </a>
+            </div>
 
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#beranda" class="nav-link">Beranda</a>
-                    <a href="#layanan" class="nav-link">Layanan</a>
-                    <a href="#portofolio" class="nav-link">Portofolio</a>
-                    <a href="#tentang" class="nav-link">Tentang</a>
-                    <a href="#review" class="nav-link">Review</a>
-                    <a href="#kontak" class="nav-link">Kontak</a>
-                </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn"
+                class="md:hidden text-gray-300 hover:text-cyber-blue transition-colors duration-300 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
 
-                <!-- Desktop Login Button -->
-                <div class="hidden md:block">
-                    <a href="#login"
-                        class="relative bg-gradient-to-r from-primary to-cyber-blue text-white px-6 py-3 rounded-lg font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/50 group">
-                        <span class="relative z-10">Login / Daftar</span>
-                        <div
-                            class="absolute inset-0 bg-gradient-to-r from-cyber-blue to-primary rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Toggle -->
-                <button id="mobile-menu-btn"
-                    class="md:hidden text-gray-300 hover:text-cyber-blue transition-colors duration-300 focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden absolute top-full left-0 w-full bg-dark/95 backdrop-blur-lg border-t border-primary/20 shadow-lg animate-slideDown">
+            <div class="flex flex-col space-y-4 p-5">
+                <a href="#beranda" class="text-gray-300 hover:text-cyber-blue transition duration-300">Beranda</a>
+                <a href="#layanan" class="text-gray-300 hover:text-cyber-blue transition duration-300">Layanan</a>
+                <a href="#portofolio" class="text-gray-300 hover:text-cyber-blue transition duration-300">Portofolio</a>
+                <a href="#tentang" class="text-gray-300 hover:text-cyber-blue transition duration-300">Tentang</a>
+                <a href="#review" class="text-gray-300 hover:text-cyber-blue transition duration-300">Review</a>
+                <a href="#kontak" class="text-gray-300 hover:text-cyber-blue transition duration-300">Kontak</a>
+                <button
+                    class="bg-gradient-to-r from-primary to-cyber-blue text-white px-6 py-3 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-primary/50">
+                    Login / Daftar
                 </button>
             </div>
-
-            <!-- Mobile Menu -->
-            <div id="mobile-menu"
-                class="hidden md:hidden mt-4 pb-4 backdrop-blur-lg bg-dark/90 rounded-lg border border-primary/20">
-                <div class="flex flex-col space-y-4 p-4">
-                    <a href="#beranda"
-                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Beranda</a>
-                    <a href="#layanan"
-                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Layanan</a>
-                    <a href="#portofolio"
-                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Portofolio</a>
-                    <a href="#tentang"
-                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Tentang</a>
-                    <a href="#review"
-                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Review</a>
-                    <a href="#kontak"
-                        class="text-gray-300 hover:text-cyber-blue transition-colors duration-300">Kontak</a>
-                    <button
-                        class="bg-gradient-to-r from-primary to-cyber-blue text-white px-6 py-3 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-primary/50">
-                        Login / Daftar
-                    </button>
-                </div>
-            </div>
-        </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
