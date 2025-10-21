@@ -26,11 +26,23 @@ window.addEventListener("scroll", handleScroll);
 // =========================
 // MOBILE MENU TOGGLE
 // =========================
-const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+const menuBtn = document.getElementById("mobile-menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
+let open = false;
 
-mobileMenuBtn.addEventListener("click", () => {
+menuBtn.addEventListener("click", () => {
+  open = !open;
   mobileMenu.classList.toggle("hidden");
+  menuBtn.innerHTML = open
+    ? '<i class="fas fa-times text-2xl"></i>'
+    : '<i class="fas fa-bars text-2xl"></i>';
+});
+document.querySelectorAll("#mobile-menu a").forEach((link) => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.add("hidden");
+    menuBtn.innerHTML = '<i class="fas fa-bars text-2xl"></i>';
+    open = false;
+  });
 });
 
 // =========================
